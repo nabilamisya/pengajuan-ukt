@@ -16,11 +16,11 @@ GET http://localhost:5000/users
 
 ###
 //get user by id
-GET http://localhost:5000/users/6eae49cc-d58e-47a8-8615-19da8ddc1523
+GET http://localhost:5000/users/8f88e1b0-6e49-4c93-bbfc-9b2569329f11
 
 ###
 //update user
-PATCH http://localhost:5000/users/6eae49cc-d58e-47a8-8615-19da8ddc1523
+PATCH http://localhost:5000/users/8f88e1b0-6e49-4c93-bbfc-9b2569329f11
 Content-Type: application/json
 
 {
@@ -51,3 +51,54 @@ GET http://localhost:5000/me
 ###
 //logout
 DELETE http://localhost:5000/logout
+
+###
+// getPermohonanUkt 
+GET http://localhost:5000/permohonan_ukts
+
+###
+// get by id permohonan ukt
+GET http://localhost:5000/permohonan_ukts/146343bf-ed24-4318-8846-4d4326bee252
+
+###
+POST http://localhost:5000/permohonan_ukts
+Content-Type: application/json
+
+{
+    "id_keringanan": "3",
+    "id_mahasiswa": "2024561",
+    "status_permohonan": "New",
+    "semester_tujuan": "5",
+    "sks": "6",
+    "ktm": "123456",
+    "ktp_mhs": "123456",
+    "ktp_ortu": "123456",
+    "kk": "123456",
+    "doc_permohonan": "ktps.pdf",
+    "slip_gaji": "200000",
+    "rumah": "Brebes",
+    "transkrip": "80"
+}
+
+###
+PATCH http://localhost:5000/permohonan_ukts/146343bf-ed24-4318-8846-4d4326bee252
+Content-Type: application/json
+
+{
+    "id_mahasiswa": "178568",
+    "status_permohonan": "Close",
+    "semester_tujuan": "4",
+    "sks": "16",
+    "ktm": "321",
+    "ktp_mhs": "6542",
+    "ktp_ortu": "6542",
+    "kk": "6542",
+    "doc_permohonan": "ktpedit.pdf",
+    "slip_gaji": "20000",
+    "rumah": "slawi",
+    "transkrip": "80"
+}
+
+###
+// delete permohonan
+DELETE http://localhost:5000/permohonan_ukts/1

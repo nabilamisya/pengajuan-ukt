@@ -5,4 +5,5 @@ const db = new Sequelize ('db_pengajuan', 'root', '', {
     dialect: "mysql"
 });
 
+
 export default db;
