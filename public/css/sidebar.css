@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.icon-bg {
+  background-color: white;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.marginTop {
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+.marginMinTop {
+  margin-top: -24px;
+}
+
+.sideKanan {
+  margin-top: 48px;
+  margin-left: 330px;
+}
+
+.formUnggah {
+  width: 400px;
+  height: 44px;
+}
+
+.file-input {
+  display: none;
+}
+
+.svg-upload {
+  cursor: pointer;
+}
+
+.btnKirim {
+  height: 44px;
+  border-radius: 8px;
+}
+
+.tableBorder{
+  border-radius: 16px;
+}

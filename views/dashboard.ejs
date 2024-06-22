@@ -1,0 +1,74 @@
+<%- include('./layouts/layout') %>
+    <!-- Content -->
+    <div class="main-content bg-gray-100 mt-16 md:ml-48 px-4 py-6">
+        <div class="container-fluid">
+            <h1 class="text-2xl font-bold mb-3">Dashboard</h1>
+            <div class="bg-white rounded-lg shadow-md p-4 pdf-viewer text-center mb-5">
+                <h2 class="text-2xl font-semibold italic">Selamat Datang, Mahasiswa!</h2>
+                <p class="italic text-sm mb-5">Sistem Informasi Pengajuan Penurunan UKT</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+                    <!-- Card 1 -->
+                    <div class="bg-green-400 text-white p-4 rounded-lg shadow-md relative overflow-hidden">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-3xl font-bold"><%= items.approve %></h3>
+                                <p>Pengajuan di Terima</p>
+                            </div>
+                            <i class="fas fa-check fa-4x opacity-25"></i>
+                        </div>
+                        <a href="#" class="absolute bottom-0 left-0 w-full py-2 text-center text-white bg-green-600 hover:bg-green-700">
+                            <!-- More info <i class="fas fa-arrow-circle-right ml-1"></i> -->
+                        </a>
+                    </div>
+                
+                    <!-- Card 2 -->
+                    <div class="bg-red-400 text-white p-4 rounded-lg shadow-md relative overflow-hidden">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-3xl font-bold"><%= items.reject %></h3>
+                                <p>Pengajuan di Tolak</p>
+                            </div>
+                            <i class="fas fa-times fa-4x opacity-25"></i>
+                        </div>
+                        <a href="#" class="absolute bottom-0 left-0 w-full py-2 text-center text-white bg-red-600 hover:bg-red-700">
+                            <!-- More info <i class="fas fa-arrow-circle-right ml-1"></i> -->
+                        </a>
+                    </div>
+                
+                    <!-- Card 3 -->
+                    <div class="bg-yellow-400 text-white p-4 rounded-lg shadow-md relative overflow-hidden">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-3xl font-bold"><%= items.process %></h3>
+                                <p>Pengajuan di Proses</p>
+                            </div>
+                            <i class="fas fa-circle fa-4x opacity-25"></i>
+                        </div>
+                        <a href="#"
+                            class="absolute bottom-0 left-0 w-full py-2 text-center text-white bg-yellow-600 hover:bg-yellow-700">
+                            <!-- Pengajuan diproses<i class="fas fa-arrow-circle-right ml-1"></i> -->
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <h1 class="text-2xl font-bold mb-3">Berkas</h1>
+            <a href="/uploads/Surat Penurunan UKT.pdf" download>
+                <div class="bg-gray-400 text-white p-4 rounded-lg shadow-md w-64 relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm font-bold">Format Surat</h3>
+                        </div>
+                        <i class="fas fa-download fa-4x opacity-25"></i>
+                    </div>
+                
+                    <a href="/uploads/Surat Penurunan UKT.pdf" download
+                        class="absolute bottom-0 left-0 w-full py-2 text-center text-white bg-gray-600 hover:bg-gray-700">
+                        <!-- More info <i class="fas fa-arrow-circle-right ml-1"></i> -->
+                    </a>
+                </div>
+            </a>
+           
+        </div>
+    </div>
+
