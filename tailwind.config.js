@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ['./daftar_ukt/**/*.{html,js}'],
   theme: {
     extend: {},
   },
