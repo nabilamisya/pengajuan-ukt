@@ -1,0 +1,112 @@
+
+<%- include("../layouts/header.ejs") %>
+<%- include("../layouts/sidebarMahasiswa.ejs") %>
+
+<!-- ========== MAIN ========== -->
+<main class="content">
+    
+<div class="container-fluid">
+    <div class="grid grid-cols-1 gap-4">
+        <% items.forEach(item=> { %>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="bg-gray-200 text-gray p-4 cursor-pointer flex justify-between"
+                    onclick="toggleCardBody('<%= item.id %>')">
+                    <h2 class="text-md font-semibold">ID Permohonan Keringanan UKT: <%= item.id %>
+                    </h2>
+                    <i id="icon-<%= item.id %>" class="fas fa-chevron-down mt-1"></i>
+                </div>
+                <div id="card-body-<%= item.id %>" class="p-4 hidden">
+                    <table class="w-full">
+                        <tbody>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Name</td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <%= item.nama_mahasiswa %>
+                                </td>
+                            </tr>
+                    
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Jenis UKT</td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <%= item.jenis_ukt %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Tanggal Pengajuan
+                                </td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <%= item.createdAt %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Status
+                                </td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <% if (item.status===1) { %>
+                                        <span
+                                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Diterima
+                                        </span>
+                                        <% } %>
+                                            <% if (item.status===2) { %>
+                                                <span
+                                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                    Ditolak
+                                                </span>
+                                                <% } %>
+                                                    <% if (item.status===0) { %>
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                            Dalam proses review
+                                                        </span>
+                                                        <% } %>
+    
+                                </td>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Berkas Pengajuan
+                                </td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <a href="/uploads/<%= item.file %>" class="text-blue-500">
+                                        <%= item.file %>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+
+</div>
+
+</main>
+<script>
+    function toggleCardBody(id) {
+        const cardBody = document.getElementById(`card-body-${id}`);
+        const icon = document.getElementById(`icon-${id}`);
+        cardBody.classList.toggle('hidden');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+    }
+</script>
+
+            
+<%- include("../layouts/footer.ejs") %>
