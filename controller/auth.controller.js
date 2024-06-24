@@ -40,12 +40,6 @@ function logout(req, res) {
 }
 
 
-
-
-
-
-
-
 module.exports = {
   form,
   prosesLogin,

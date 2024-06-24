@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { Pengajuan} = require('../models')
+const { Pengajuan, UKT} = require('../models');
+const { uploadd, addPengajuan, putPengajuan, deletePengajuan, getEditPengajuan } = require('../controller/pengajuan.controller');
 
 router.get("/dashboard", async (req, res) => {
         const user = req.cookies.user;
@@ -48,13 +49,20 @@ router.get("/riwayatpengajuan", async (req, res) => {
         const items = await Pengajuan.findAll({
               where: { nama_mahasiswa:user?.nama?.trim() }
         });
+         const ukt = await UKT.findAll({
+        });
         res.render('mahasiswa/riwayat_pengajuan', {
-            title: 'Riwayat Pengajuan', items
+            title: 'Riwayat Pengajuan', items, ukt
            
         });
     } catch (error) {
         console.error('Error fetching data:', error);
         res.status(500).send('Internal Server Error');
     }
-});
+});     
+
+router.post("/tambah/pengajuan", uploadd, addPengajuan)
+router.post("/update/pengajuan", uploadd, putPengajuan)
+router.post("/delete/pengajuan/:id",deletePengajuan)
+router.get("/pengajuan/:id", getEditPengajuan)
 module.exports = router;
