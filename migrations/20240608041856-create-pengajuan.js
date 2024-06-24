@@ -10,10 +10,22 @@ module.exports = {
         primaryKey: true
       },
       jenis_ukt: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Ukt', // Nama tabel yang direferensikan
+          key: 'id'       // Kolom yang direferensikan di tabel Users
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       nama_mahasiswa: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users', // Nama tabel yang direferensikan
+          key: 'id'       // Kolom yang direferensikan di tabel Users
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       sks: {
         type: Sequelize.INTEGER,
@@ -23,6 +35,11 @@ module.exports = {
       },
         file: {
         type: Sequelize.TEXT,
+      },
+      valid: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false // Nilai default saat baris baru ditambahkan
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +51,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
+      
     });
   },
 

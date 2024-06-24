@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "Hanya4JJi",
     "database": "uiweb1",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "Hanya4JJi",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": "Hanya4JJi",
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"

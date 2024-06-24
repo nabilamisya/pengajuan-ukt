@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Pengajuan} = require('../models')
+const {Pengajuan} = require('../models')
 
 router.get("/dashboard", async (req, res) => {
         const user = req.cookies.user;
