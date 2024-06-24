@@ -1,0 +1,241 @@
+
+<%- include("../layouts/header.ejs") %>
+<%- include("../layouts/sidebarMahasiswa.ejs") %>
+
+<!-- ========== MAIN ========== -->
+<main class="content">
+    
+<div class="container-fluid">
+    <button class="button-tambah mb-4" onclick="openModalTambah()">Tambah Pengajuan</button>
+    <div class="grid grid-cols-1 gap-4">
+        <% items.forEach(item=> { %>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="bg-gray-200 text-gray p-4 cursor-pointer flex justify-between"
+                    onclick="toggleCardBody('<%= item.id %>')">
+                    <h2 class="text-md font-semibold">ID Permohonan Keringanan UKT: <%= item.id %>
+                    </h2>
+                    <i id="icon-<%= item.id %>" class="fas fa-chevron-down mt-1"></i>
+                </div>
+                <div id="card-body-<%= item.id %>" class="p-4 hidden">
+                    <table class="w-full">
+                        <tbody>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Name</td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <%= item.nama_mahasiswa %>
+                                </td>
+                            </tr>
+                    
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Jenis UKT</td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <%= item.jenis_ukt %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900" style="width: 1px; white-space: nowrap;">SKS</td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900" style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <%= item.sks %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Tanggal Pengajuan
+                                </td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <%= item.createdAt %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Status
+                                </td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <% if (item.status===1) { %>
+                                        <span
+                                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Diterima
+                                        </span>
+                                        <% } %>
+                                            <% if (item.status===2) { %>
+                                                <span
+                                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                    Ditolak
+                                                </span>
+                                                <% } %>
+                                                    <% if (item.status===0) { %>
+                                                        <span
+                                                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                            Dalam proses review
+                                                        </span>
+                                                        <% } %>
+    
+                                </td>
+                            <tr>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">Berkas Pengajuan
+                                </td>
+                                <td class="py-2 pl-2 text-sm font-medium text-gray-900"
+                                    style="width: 1px; white-space: nowrap;">:</td>
+                                <td class="py-2 pl-2 text-sm text-gray-500">
+                                    <a href="/uploads/<%= item.file %>" class="text-blue-500">
+                                        <%= item.file %>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tr>
+    
+                        </tbody>
+                    </table>
+                    <button class="button-edit" onclick="openModalEdit('<%= item.id %>')">Edit</button>
+                        <form id="deleteAsetForm-<%= item.id %>" action="/mahasiswa/delete/pengajuan/<%= item.id %>" class="mt-3" method="post"
+                            style="display: inline-block; margin-left: -5px;">
+                            <button class="button-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                        </form>
+                        
+                </div>
+            </div>
+            <% }) %>
+    </div>
+
+</div>
+
+<div id="tambahModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModalTambah()">&times;</span>
+        <h3 class="center-text">Tambah Pengajuan</h3>
+        <form  action="/mahasiswa/tambah/pengajuan" method="post" enctype="multipart/form-data">
+            <!-- Form tambah akun Kalab -->
+            <div class="form-col">
+                <div class="form-group form-group-half">
+                    <label for="jenis_kelamin">Jenis UKT:</label>
+                    <select id="jenis_kelamin" name="jenis_ukt" required>
+                        <option value="" disabled selected>...</option>
+                        <% ukt.forEach((aset, index)=> { %>
+                            <option value="<%= aset.jenis%>">
+                                <%= aset.jenis%>
+                            </option>
+                            <% }); %>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="sks">SKS:</label>
+                    <input type="number" id="nama" name="sks" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="file">File:</label>
+                    <input type="file" id="file" name="file">
+                </div>
+            </div>
+
+
+
+            <button type="submit">Tambah</button>
+        </form>
+    </div>
+</div>
+
+<div id="editModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModalEdit()">&times;</span>
+        <h3 class="center-text">Edit Pengajuan</h3>
+        <form action="/mahasiswa/update/pengajuan" method="post" enctype="multipart/form-data">
+            <!-- Form tambah akun Kalab -->
+            <input type="text" id="id_pengajuan" name="id_pengajuan" style="display: none;" required>
+            <div class="form-col">
+                <div class="form-group form-group-half">
+                    <label for="jenis_ukt">Jenis UKT:</label>
+                    <select id="jenis_ukt" name="jenis_ukt" required>
+                        <option value="" disabled selected>...</option>
+                        <% ukt.forEach((aset, index)=> { %>
+                            <option value="<%= aset.jenis%>">
+                                <%= aset.jenis%>
+                            </option>
+                            <% }); %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sks">SKS:</label>
+                    <input type="number" id="sks" name="sks" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="file">File:</label>
+                    <input type="file" id="file" name="file">
+                </div>
+            </div>
+
+
+            <button type="submit">Simpan</button>
+        </form>
+    </div>
+</div>
+
+</main>
+<script>
+     function openModalTambah() {
+            // Menampilkan modal tambah akun Kalab
+            document.getElementById("tambahModal").style.display = "block";
+        }
+        function closeModalTambah() {
+            document.getElementById("tambahModal").style.display = "none";
+        }
+
+        
+            async function openModalEdit(id) {
+                // // Menampilkan modal edit
+                document.getElementById("editModal").style.display = "block";
+
+                try {
+                    // Mengambil data akun kalab dari server berdasarkan ID
+                    const response = await fetch(`/mahasiswa/pengajuan/` + id);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch akun kalab data');
+                    }
+                    const userData = await response.json();
+
+                    // Debug: Periksa data yang diterima dari server
+                    console.log('User data:', userData);
+
+                    // Mengisi nilai-nilai form edit dengan data akun kalab yang diterima
+                     document.getElementById("sks").value = userData.sks;
+                     document.getElementById("jenis_ukt").value = userData.jenis_ukt;
+                    //document.getElementById("file").value = userData.file;
+                    document.getElementById("id_pengajuan").value = userData.id;
+
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                    // Jika terjadi kesalahan dalam mengambil data akun kalab, tutup modal edit
+                    //closeModalEdit();
+                }
+            }
+
+            // Fungsi untuk menutup modal edit akun kalab
+            function closeModalEdit() {
+                document.getElementById("editModal").style.display = "none";
+            }
+    function toggleCardBody(id) {
+        const cardBody = document.getElementById(`card-body-${id}`);
+        const icon = document.getElementById(`icon-${id}`);
+        cardBody.classList.toggle('hidden');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+    }
+</script>
+
+            
+<%- include("../layouts/footer.ejs") %>
