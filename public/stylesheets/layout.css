@@ -1,0 +1,113 @@
+/* CSS UNTUK LAYOUT */
+
+
+.body{
+    background-color: #dadef7;
+}
+
+.sticky-top {
+    top: 0;
+    left: 280px;
+    width: 100%;
+    position: fixed;
+    left: 280px; 
+    width: calc(100% - 280px); 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+display: flex;
+justify-content: space-between; 
+align-items: center;
+}
+
+
+.navbar  h1 {
+margin-left: 25px; /* Remove default margin */
+font-size: 24px;
+font-weight: bold;
+color: #322C29;
+white-space: nowrap;
+}
+
+.header-content h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0; 
+}
+.navbar-items {
+display: flex;
+gap: 10px; /* Add spacing between icon and button */
+}
+
+
+.navbar-items {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 20px; 
+}
+
+.btn-danger {
+    background-color: #5e5e5e;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: #da0b1f;
+}
+
+.notif-icon-img {
+    width: 30px; 
+    height: 30px;
+    display: block; 
+}
+
+#docs-sidebar {
+    background-color: #0f054d; 
+}
+
+.menu:hover, .sub-menu:hover {
+    background-color: #E65F2B;
+    cursor: pointer;
+}
+
+.bg-orange {
+    background-color: #E65F2B;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 280px; 
+    width: calc(100% - 280px); 
+
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.content {
+    margin-top: 70px; 
+    margin-right: 200px;
+    margin-bottom: 20px;
+    margin-left: 300px; 
+    width: calc(100% - 320px); 
+    background-color:#e3e3e3;
+    padding: 20px; 
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+

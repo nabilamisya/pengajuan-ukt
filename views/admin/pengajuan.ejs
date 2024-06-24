@@ -1,0 +1,130 @@
+
+<%- include("../layouts/header.ejs") %>
+<%- include("../layouts/sidebarAdmin.ejs") %>
+
+<!-- ========== MAIN ========== -->
+<main class="content">
+    
+<div class="container-fluid">
+    <div class="container-fluid">
+       
+        <div class="bg-white rounded-lg shadow-md p-4 pdf-viewer text-center mb-5">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            No</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Nama Mahasiswa</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Jenis UKT</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            SKS</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            File</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Aksi</th>
+                      
+    
+    
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <% items.forEach(function(mhs, index) { %>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-500 text-left">
+                                <%= index + 1 %>
+                            </td>
+                            <td class="py-4 text-sm text-left px-6 text-gray-500">
+                                <%= mhs.nama_mahasiswa%>
+                            </td>
+                            <td class="px-6 text-sm font-medium text-left text-gray-900">
+                                <%= mhs.jenis_ukt%>
+                            </td>
+                            <td class="py-4 text-sm text-left px-6 text-gray-500">
+                                <%= mhs.sks %>
+                            </td>
+                            <td><a href="/uploads/<%= mhs.file %>" target="_blank" style="color: blue;">
+                                    <%= mhs.file %>
+                                </a></td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                            
+                                <% if (mhs.status==0) { %>
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white"
+                                        style="background-color:rgb(245, 178, 9);">
+                                        Menunggu</span>
+                                    <% } else if (mhs.status==1) { %>
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium  text-white"
+                                            style="background-color:rgb(16, 212, 56);">
+                                            Diterima</span>
+                                        <% } else if (mhs.status==2) { %>
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white"
+                                                style="background-color:rgb(255, 52, 34);">
+                                                Ditolak</span>
+                                            <% } %>
+                            
+                            </td>
+                            <td>
+                                <div style="display: inline-block;">
+                                    <button class="button-edit" onclick="openModalEdit('<%= mhs.id %>')">Edit Status</button>
+                                </div>
+                            </td>
+    
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+    
+            <div id="editModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalEdit()">&times;</span>
+                    <h3 class="center-text">Edit Akun Kalab</h3>
+                    <form id="editAkunKalabForm" action="/admin/pengajuan/status" method="post">
+                        <!-- Form edit akun Kalab -->
+                        <div class="form-col">
+                            <div class="form-group form-group-half" style="display: flex; flex-direction: column;">
+                                <input type="text" id="id" name="id" style="display: none;" />
+                                <label for="editJenisKelamin">Status:</label>
+                                <select id="editJenisKelamin" name="status" required>
+                                    <option value="" disabled selected>...</option>
+                                    <option value="1">disetujui</option>
+                                    <option value="2">ditolak</option>
+                                </select>
+                            </div>
+                        </div>
+            
+            
+            
+                        <button type="submit">Simpan</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+
+</main>
+
+    <script>
+
+
+
+                async function openModalEdit(id) {
+                    // // Menampilkan modal edit
+                    document.getElementById("editModal").style.display = "block"
+                        document.getElementById("id").value = id;
+                }
+
+                // Fungsi untuk menutup modal edit akun kalab
+                function closeModalEdit() {
+                    document.getElementById("editModal").style.display = "none";
+                }
+
+            </script>
+<%- include("../layouts/footer.ejs") %>

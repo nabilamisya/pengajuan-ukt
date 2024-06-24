@@ -1,0 +1,7 @@
+# TB Kelompok 16
+
+Pengelolaan Aset Laboratorium Sistem Informasi
+1. RIZKA KURNIA ILLAHI 
+2. IZZA TRY MALINDA
+3. SYAUQI NABIIH MARWA
+4. GALIH RESTU CAHYA PEMBAYUN

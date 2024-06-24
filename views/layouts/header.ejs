@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/layout.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/content.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body class="body">
+    <!-- ========== HEADER ========== -->
+    <header class="sticky-top">
+        <nav class="navbar">
+            <h1><%= title %></h1>
+            <div class="container">
+                <div class="navbar-items">
+                    
+                    <!-- Icon Notifikasi -->
+                    <a href="/notifications" class="notification-icon">
+                        <img src="/images/notifikasi.png" alt="Notifikasi" class="notif-icon-img">
+                    </a>
+                    <!-- Tombol Logout -->
+                    <form action="/auth/logout" method="POST">
+                        <button type="logout" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
