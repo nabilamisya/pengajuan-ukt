@@ -1,0 +1,240 @@
+<%- include("../layouts/header.ejs") %>
+  <%- include("../layouts/sidebarAdmin.ejs") %>
+
+    <!-- ========== MAIN ========== -->
+    <main class="content">
+
+      <div class="container-fluid">
+        <div class="container-fluid">
+
+          <div class="bg-white rounded-lg shadow-md p-4 pdf-viewer  mb-5">
+      <button class="button-edit w-auto flex self-end" onclick="openBeritaTambah()">Tambah</button>
+
+      <div class="ps-5 w-full">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Judul</th>
+              <th>Deskripsi</th>
+              <th>Tanggal</th>
+              <th>File</th>
+             <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% beritas.forEach((berita, index)=> { %>
+              <tr>
+                <td>
+                  <%= index + 1 %>
+                </td>
+                <td>
+                  <%= berita.judul %>
+                </td>
+                <td>
+                  <%= berita?.deskripsi %>
+                </td>
+                <td>
+                  <%= berita?.createdAt %>
+                </td>
+                <td><a href="/uploads/<%= berita.file %>" target="_blank" style="color: blue;">
+                    <%= berita.file %>
+                  </a></td>
+                <td class="flex flex-row">
+                  <button class="button-lihat" style="background-color: rgb(13, 83, 189);" onclick="openBeritaView('<%= berita.id %>')">Detail</button>
+                  <button class="button-lihat" style="background-color: orange;" onclick="openBeritaEdit('<%= berita.id %>')">Edit</button>
+                  <form method="post" action="/admin/berita/delete/<%= berita.id %>" onsubmit="return confirm('Apakah anda yakin menghapus data ini?');">
+                        <button class="button-hapus" >Hapus</button>
+                  </form>
+                
+                </td>
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+        </main>
+        
+
+
+
+    <div id="tambahBerita" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" style="cursor: pointer;" onclick="closeBeritaTambah()">&times;</span>
+        <h3 class="center-text">Tambah Berita</h3>
+        <form id="tambahBeritaForm" action="/admin/berita" method="post" enctype="multipart/form-data">
+          <div class="form-col">
+            <div class="form-group w-full">
+              <label for="nama">Judul:</label>
+              <input type="text" id="nama" name="judul" required>
+            </div>
+
+                <div class="form-group w-full">
+                  <label for="nama">Deskripsi:</label>
+                  <textarea id="nama" class="w-full border border-gray-300" rows="4" name="deskripsi" required></textarea>
+                </div>
+
+            <div class="form-group">
+              <label for="nama">File:</label>
+              <input type="file" id="nama" name="file">
+            </div>
+
+          </div>
+
+
+          <button type="submit">Tambah</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="editBerita" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" style="cursor: pointer;" onclick="closeBeritaEdit()">&times;</span>
+        <h3 class="center-text">Edit Berita</h3>
+        <form id="tambahBeritaForm" action="/admin/berita/edit" method="post" enctype="multipart/form-data">
+          <input type="text" id="id" name="id" style="display: none;" />
+            <div class="form-col">
+              <div class="form-group w-full">
+                <label for="nama">Judul:</label>
+                <input type="text" id="judul" name="judul" required>
+              </div>
+            
+              <div class="form-group w-full">
+                <label for="nama">Deskripsi:</label>
+                <textarea id="deskripsi" class="w-full border border-gray-300" name="deskripsi" required></textarea>
+              </div>
+            
+              <div class="form-group">
+                <label for="nama">File:</label>
+                <input type="file" id="nama" name="file">
+              </div>
+            
+            </div>
+
+
+          <button type="submit">Simpan</button>
+        </form>
+      </div>
+    </div>
+
+      <div id="viewBerita" class="modal" style="display: none;">
+        <div class="modal-content">
+          <span class="close" style="cursor: pointer;" onclick="closeBeritaView()">&times;</span>
+          <h3 class="center-text">Detail Berita</h3>
+          <form id="tambahBeritaForm" action="/admin/berita/edit" method="post" enctype="multipart/form-data">
+            <div class="form-col">
+              <div class="form-group w-full">
+                <label for="nama">Judul:</label>
+                <div type="text" id="judul1" name="judul"></div>
+              </div>
+      
+              <div class="form-group w-full">
+                <label for="nama">Deskripsi:</label>
+                <div id="deskripsi1" name="deskripsi"></div>
+              </div>
+      
+              <div class="form-group">
+                <label for="nama">File:</label>
+                <img src="" class="w-48" id="file1" name="file"/>
+              </div>
+      
+            </div>
+      
+      
+          </form>
+        </div>
+      </div>
+
+  <%- include("../layouts/footer.ejs") %>
+    <script>
+
+      function openBeritaTambah() {
+        document.getElementById("tambahBerita").style.display = "block";
+      }
+
+      function closeBeritaTambah() {
+        document.getElementById("tambahBerita").style.display = "none";
+      }
+
+      async function openBeritaEdit(id) {
+        document.getElementById("editBerita").style.display = "block";
+
+        try {
+          const response = await fetch(`/admin/berita/`+id);
+          if (!response.ok) {
+            throw new Error('Failed to fetch berita data');
+          }
+          const userData = await response.json();
+
+          console.log('User data:', userData);
+          document.getElementById("deskripsi").value = userData.deskripsi;
+          document.getElementById("id").value = userData.id;
+          document.getElementById("judul").value = userData.judul;
+          document.getElementById("file").value = userData.file;
+
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+
+      function closeBeritaEdit() {
+        document.getElementById("editBerita").style.display = "none";
+      }
+
+    
+        async function openBeritaView(id) {
+            document.getElementById("viewBerita").style.display = "block";
+
+            try {
+              const response = await fetch(`/admin/berita/` + id);
+              if (!response.ok) {
+                throw new Error('Failed to fetch berita data');
+              }
+              const userData = await response.json();
+
+              console.log('User data:', userData);
+              document.getElementById("deskripsi1").innerHTML = userData.deskripsi;
+              document.getElementById("judul1").innerText = userData.judul;
+              document.getElementById("file1").src = "/uploads/"+userData.file;
+
+            } catch (error) {
+              console.error('Error fetching user data:', error);
+            }
+          }
+
+          function closeBeritaView() {
+            document.getElementById("viewBerita").style.display = "none";
+          }
+
+      function showNotification(message) {
+        const notification = document.getElementById('notification');
+        notification.innerText = message;
+        notification.style.display = 'block';
+        notification.style.backgroundColor = '#f8d7da'; // Warna latar belakang merah
+        notification.style.color = '#721c24'; // Warna teks merah gelap
+        notification.style.padding = '10px';
+        notification.style.margin = '10px 0';
+        notification.style.borderRadius = '5px';
+      }
+
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 5000);
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorMessage = urlParams.get('error');
+      if (errorMessage) {
+        showNotification(errorMessage);
+      }
+    </script>
+</body>
+
+</html>

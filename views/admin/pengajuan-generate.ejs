@@ -1,16 +1,28 @@
 
-<%- include("../layouts/header.ejs") %>
-<%- include("../layouts/sidebarAdmin.ejs") %>
-
 <!-- ========== MAIN ========== -->
-<main class="content">
-    
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/layout.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/content.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="body">
+
 <div class="container-fluid">
     <div class="container-fluid">
        
-        <div class="bg-white rounded-lg shadow-md p-4 pdf-viewer  mb-5">
-            <button onclick="window.location.href='/admin/pengajuan-generate'" class="button-hapus">Generate PDF</button>
-            <table class="min-w-full divide-y divide-gray-200 text-center">
+        <div class="bg-white rounded-lg shadow-md p-4 pdf-viewer text-center mb-5">
+            <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -29,7 +41,6 @@
                             File</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status</th>
-                        
                       
     
     
@@ -70,11 +81,7 @@
                                             <% } %>
                             
                             </td>
-                            <!-- <td>
-                                <div style="display: inline-block;">
-                                    <button class="button-edit" onclick="openModalEdit('<%= mhs.id %>')">Edit Status</button>
-                                </div>
-                            </td> -->
+                        
     
                         </tr>
                         <% }); %>
@@ -82,10 +89,20 @@
             </table>
         </div>
     
-
     </div>
 </div>
 
-</main>
 
-<%- include("../layouts/footer.ejs") %>
+    <script>
+
+
+      window.onload = function () {
+        window.print()
+      }
+    window.onafterprint = function () {
+        window.location.href = '/admin/pengajuan';
+    }
+    </script>
+
+</body>
+</html>

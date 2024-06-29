@@ -168,7 +168,7 @@ input[type="date"]
     box-sizing: border-box;
 }
 
-#kepalaLab, #editKepalaLab, #jenis_kelamin, #editJenisKelamin, #lab, #aset {
+#kepalaLab, #editKepalaLab, #jenis_kelamin, #jenis_ukt, #sks, #file, #editJenisKelamin, #lab, #aset {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -178,7 +178,7 @@ input[type="date"]
     color: #333;
     cursor: pointer;
 }
-#jenis_kelamin, #lab, #aset option {
+#jenis_kelamin, #jenis_ukt, #lab, #aset option {
     padding: 8px;
     font-size: 16px;
     color: #333;

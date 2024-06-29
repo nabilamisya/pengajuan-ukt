@@ -8,7 +8,6 @@ var indexRouter = require('./routes/auth.route');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth.route');
 var adminRouter = require('./routes/admin.route');
-var mahasiswaRouter = require('./routes/mahasiswa.route');
 
 var app = express();
 
@@ -27,7 +26,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
-app.use('/mahasiswa', mahasiswaRouter);
 app.use('/uploads', express.static('uploads'));
 
 // error handler

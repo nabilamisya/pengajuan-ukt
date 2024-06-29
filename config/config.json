@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "uiweb1",
+    "database": "db_pengajuan",
     "host": "localhost",
     "dialect": "mysql"
   },

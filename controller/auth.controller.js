@@ -27,7 +27,7 @@ const prosesLogin = async (req, res) => {
   console.log(user.role)
 
   if (user?.role?.trim() == 'Admin') {
-    return res.redirect('/admin/dashboard');
+    return res.redirect('/admin/pengajuan');
   } else  {
     return res.redirect('/mahasiswa/dashboard');
   } 
@@ -38,6 +38,12 @@ function logout(req, res) {
   res.clearCookie('user');
   res.redirect('/auth/login');
 }
+
+
+
+
+
+
 
 
 module.exports = {
