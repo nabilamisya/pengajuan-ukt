@@ -27,10 +27,8 @@ const prosesLogin = async (req, res) => {
   console.log(user.role)
 
   if (user?.role?.trim() == 'Admin') {
-    return res.redirect('/admin/pengajuan');
-  } else  {
-    return res.redirect('/mahasiswa/dashboard');
-  } 
+    return res.redirect('/admin/dashboard');
+  }
 
 };
 
