@@ -1,7 +1,7 @@
-# TB Kelompok 16
+# TB Kelompok 15
 
-Pengelolaan Aset Laboratorium Sistem Informasi
-1. RIZKA KURNIA ILLAHI 
-2. IZZA TRY MALINDA
-3. SYAUQI NABIIH MARWA
-4. GALIH RESTU CAHYA PEMBAYUN
+PENGAJUAN UKT
+1. Anastasya Estu Wahyudi 
+2. Nabila Fitri Misyandra
+3. Haleef Rayyan
+4. Titania Rahmawati
